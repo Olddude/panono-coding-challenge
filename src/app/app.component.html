@@ -1,3 +1,5 @@
 <header>Header</header>
 <aside>Side</aside>
-<main>{{content$ | async | json}}</main>
+<main>
+  <app-list [model]="(content$ | async)?.items"></app-list>
+</main>
