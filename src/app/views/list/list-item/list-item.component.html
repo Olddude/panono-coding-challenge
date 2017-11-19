@@ -1,0 +1,15 @@
+<div *ngIf="item" class="ui-g">
+  <div class="ui-g-6">
+    <p>{{item?.data?.title | slice:0:20}}</p>
+  </div>
+  <div class="ui-g-3">
+    <p>{{item?.data?.published_at | date}}</p>
+  </div>
+  <div class="ui-g-3">
+    <button pButton
+            type="button"
+            [label]="getLabel()"
+            (click)="addRemoveToFavs()">
+    </button>
+  </div>
+</div>

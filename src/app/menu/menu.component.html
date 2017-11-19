@@ -1,0 +1,18 @@
+<p-menubar [model]="[{label: 'Favorite 360', icon: 'fa-home'}]">
+  <button pButton icon="fa-gear" (click)="toggleSidebar()"></button>
+</p-menubar>
+<p-sidebar [(visible)]="isSidebarVisible"
+           position="left"
+           styleClass="sidebar">
+  <h4>Sidebar</h4>
+  <div class="options">
+    <div>
+      <label>View</label>
+      <p-dropdown [options]="viewOptions" [(ngModel)]="selectedView"></p-dropdown>
+    </div>
+    <div>
+      <label>Filter</label>
+      <p-dropdown [options]="filterOptions" [(ngModel)]="selectedFilter"></p-dropdown>
+    </div>
+  </div>
+</p-sidebar>

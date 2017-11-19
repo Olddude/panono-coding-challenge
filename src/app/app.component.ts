@@ -9,9 +9,10 @@ import { PanonoApp } from './model/panono';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+
   content$: Observable<PanonoApp>;
 
   constructor(private http: Http) {

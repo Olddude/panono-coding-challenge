@@ -1,26 +1,41 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
 import { HttpModule } from '@angular/http';
 import { GridComponent } from './views/grid/grid.component';
 import { ListComponent } from './views/list/list.component';
-import { ButtonModule } from 'primeng/primeng';
-import { ItemComponent } from './views/list/item/item.component';
+import { StorageService } from './services/storage-service';
+import {
+  ButtonModule, DataListModule, DataTableModule, DropdownModule, MenubarModule, MenuModule,
+  SidebarModule,
+} from 'primeng/primeng';
+import { ListItemComponent } from './views/list/list-item/list-item.component';
+import { MenuComponent } from './menu/menu.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     GridComponent,
     ListComponent,
-    ItemComponent
+    ListItemComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
-    ButtonModule
+    FormsModule,
+    DataListModule,
+    DataTableModule,
+    ButtonModule,
+    MenuModule,
+    MenubarModule,
+    SidebarModule,
+    DropdownModule,
+    BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [StorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

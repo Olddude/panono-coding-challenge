@@ -1,5 +1,6 @@
-<header>Header</header>
-<aside>Side</aside>
-<main>
-  <app-list [model]="(content$ | async)?.items"></app-list>
-</main>
+<div id="app">
+  <app-menu></app-menu>
+  <main>
+    <app-list [items]="(content$ | async)?.items"></app-list>
+  </main>
+</div>
