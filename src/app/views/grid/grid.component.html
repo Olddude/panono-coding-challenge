@@ -1,3 +1,5 @@
-<p>
-  grid works!
-</p>
+<div *ngIf="items" class="ui-g">
+  <div *ngFor="let item of items" class="ui-g-4">
+    <app-grid-item [item]="item"></app-grid-item>
+  </div>
+</div>

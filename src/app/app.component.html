@@ -1,6 +1,7 @@
 <div id="app">
   <app-menu></app-menu>
   <main>
-    <app-list [items]="(content$ | async)?.items"></app-list>
+    <!--<app-list [items]="(content$ | async)?.items"></app-list>-->
+    <app-grid [items]="(content$ | async)?.items"></app-grid>
   </main>
 </div>

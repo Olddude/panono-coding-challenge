@@ -5,14 +5,15 @@ import { HttpModule } from '@angular/http';
 import { GridComponent } from './views/grid/grid.component';
 import { ListComponent } from './views/list/list.component';
 import { StorageService } from './services/storage-service';
-import {
-  ButtonModule, DataListModule, DataTableModule, DropdownModule, MenubarModule, MenuModule,
-  SidebarModule,
-} from 'primeng/primeng';
 import { ListItemComponent } from './views/list/list-item/list-item.component';
 import { MenuComponent } from './menu/menu.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import {
+  ButtonModule, DataListModule, DataTableModule, DropdownModule, MenubarModule, MenuModule,
+  SidebarModule,
+} from 'primeng/primeng';
+import { GridItemComponent } from './views/grid/grid-item/grid-item.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { FormsModule } from '@angular/forms';
     GridComponent,
     ListComponent,
     ListItemComponent,
-    MenuComponent
+    MenuComponent,
+    GridItemComponent
   ],
   imports: [
     BrowserModule,
