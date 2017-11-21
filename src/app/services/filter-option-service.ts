@@ -16,7 +16,7 @@ export class FilterOptionService {
     return this.optionSubject.asObservable();
   }
 
-  selectFilter(view: string) {
-    this.optionSubject.next(view);
+  selectFilter(filter: string) {
+    this.optionSubject.next(filter);
   }
 }

@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs/Subscription';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss']
 })
-export class MenuComponent implements OnInit, OnDestroy {
+export class MenuComponent implements OnInit {
 
   isSidebarVisible = false;
 
@@ -27,27 +27,17 @@ export class MenuComponent implements OnInit, OnDestroy {
 
   selectedFilter: string;
 
-  subscriptions: Subscription[] = [];
-
   constructor(private viewOptionService: ViewOptionService,
               private filterOptionService: FilterOptionService) { }
 
   ngOnInit() {
-    this.subscriptions.push(
-      this.viewOptionService
-        .view()
-        .subscribe(viewOption => this.selectedView = viewOption)
-    );
+    this.viewOptionService
+      .view()
+      .subscribe(viewOption => this.selectedView = viewOption);
 
-    this.subscriptions.push(
-      this.filterOptionService
-        .filter()
-        .subscribe(filterOption => this.selectedFilter = filterOption)
-    );
-  }
-
-  ngOnDestroy() {
-    this.subscriptions.forEach(_ => _.unsubscribe());
+    this.filterOptionService
+      .filter()
+      .subscribe(filterOption => this.selectedFilter = filterOption);
   }
 
   toggleSidebar() {
@@ -59,6 +49,7 @@ export class MenuComponent implements OnInit, OnDestroy {
   }
 
   selectFilter() {
+    console.log(this.selectedFilter);
     this.filterOptionService.selectFilter(this.selectedFilter);
   }
 }

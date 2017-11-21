@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Item } from '../../model/panono';
-import { HttpService } from '../../services/http-service';
-import { Observable } from 'rxjs/Observable';
 
 
 @Component({
@@ -9,17 +7,14 @@ import { Observable } from 'rxjs/Observable';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
-export class ListComponent implements OnInit {
+export class ListComponent {
 
-  items$: Observable<Item[]>;
+  @Input()
+  items: Item[];
 
-  constructor(private httpService: HttpService) { }
+  constructor() { }
 
   isEven(index: number) {
     return (index % 2 === 0);
-  }
-
-  ngOnInit() {
-    this.items$ = this.httpService.get('http://api3-dev.panono.com/explore').map(_ => _.items);
   }
 }
