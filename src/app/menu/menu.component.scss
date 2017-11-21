@@ -1,8 +1,13 @@
 ::ng-deep .sidebar {
   margin-top: 4rem;
-  height: 200px;
+  height: 300px;
   .options {
     display: flex;
     flex-direction: column;
+    .option-item {
+      margin: 1rem;
+      display: flex;
+      flex-direction: column;
+    }
   }
 }

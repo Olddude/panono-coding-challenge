@@ -1,5 +1,5 @@
-<div *ngIf="items" class="ui-g">
-  <div *ngFor="let item of items" class="ui-g-4">
+<div class="ui-g">
+  <div *ngFor="let item of (items$ | async)" class="ui-g-12 ui-md-4">
     <app-grid-item [item]="item"></app-grid-item>
   </div>
 </div>

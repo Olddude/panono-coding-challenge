@@ -8,7 +8,7 @@ import { Item } from '../model/panono';
 @Injectable()
 export class StorageService {
 
-  storageSubject = new BehaviorSubject(window.localStorage);
+  storageSubject = new BehaviorSubject<Storage>(window.localStorage);
 
   constructor() {
   }
@@ -28,7 +28,7 @@ export class StorageService {
     this.storageSubject.next(window.localStorage);
   }
 
-  storage(): Observable<any> {
+  storage(): Observable<Storage> {
     return this.storageSubject.asObservable();
   }
 }

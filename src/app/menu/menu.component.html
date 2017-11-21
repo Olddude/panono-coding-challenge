@@ -6,13 +6,19 @@
            styleClass="sidebar">
   <h4>Sidebar</h4>
   <div class="options">
-    <div>
+    <div class="option-item">
       <label>View</label>
-      <p-dropdown [options]="viewOptions" [(ngModel)]="selectedView"></p-dropdown>
+      <p-dropdown [options]="viewOptions"
+                  [(ngModel)]="selectedView"
+                  (onChange)="selectView()">
+      </p-dropdown>
     </div>
-    <div>
+    <div class="option-item">
       <label>Filter</label>
-      <p-dropdown [options]="filterOptions" [(ngModel)]="selectedFilter"></p-dropdown>
+      <p-dropdown [options]="filterOptions"
+                  [(ngModel)]="selectedFilter"
+                  (onChange)="selectFilter()">
+      </p-dropdown>
     </div>
   </div>
 </p-sidebar>

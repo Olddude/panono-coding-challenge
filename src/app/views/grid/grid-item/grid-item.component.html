@@ -1,1 +1,15 @@
-<img [src]="getThumbnailUrl()" alt="asd">
+<div *ngIf="item" class="item">
+  <div class="wrapper">
+    <div class="overlay">
+      <button pButton
+              class="favBtn"
+              type="button"
+              [label]="label"
+              (click)="addRemoveToFavs()">
+      </button>
+      <div class="title">{{item?.data?.title | slice:0:20}}</div>
+      <div class="published">{{item?.data?.published_at | date}}</div>
+    </div>
+  </div>
+  <img [src]="thumbnailUrl" alt="asd">
+</div>

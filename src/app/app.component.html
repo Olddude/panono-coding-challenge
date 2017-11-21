@@ -1,7 +1,8 @@
 <div id="app">
+  {{items | json}}
   <app-menu></app-menu>
   <main>
-    <!--<app-list [items]="(content$ | async)?.items"></app-list>-->
-    <app-grid [items]="(content$ | async)?.items"></app-grid>
+    <app-list name="list" [hidden]="(currentView$ | async) !== 'List'"></app-list>
+    <app-grid name="grid" [hidden]="(currentView$ | async) !== 'Grid'"></app-grid>
   </main>
 </div>

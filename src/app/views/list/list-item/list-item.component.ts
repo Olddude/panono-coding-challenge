@@ -14,6 +14,9 @@ export class ListItemComponent implements OnInit {
   @Input()
   item: Item;
 
+  @Input()
+  index: number;
+
   isFavorite = false;
 
   constructor(private storageService: StorageService) { }
@@ -34,5 +37,9 @@ export class ListItemComponent implements OnInit {
     } else {
       this.storageService.add(this.item);
     }
+  }
+
+  isEven() {
+    return this.index % 2 === 0;
   }
 }

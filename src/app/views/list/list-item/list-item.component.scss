@@ -1,4 +1,7 @@
-* {
-  margin: 0;
-  padding: 0;
+.item {
+  align-items: center;
+  min-height: 54px;
+}
+.even {
+  background-color: #EEE;
 }

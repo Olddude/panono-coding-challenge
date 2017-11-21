@@ -10,10 +10,13 @@ import { MenuComponent } from './menu/menu.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import {
-  ButtonModule, DataListModule, DataTableModule, DropdownModule, MenubarModule, MenuModule,
+  ButtonModule, DataListModule, DataTableModule, DropdownModule, MenubarModule, MenuModule, OverlayPanelModule,
   SidebarModule,
 } from 'primeng/primeng';
 import { GridItemComponent } from './views/grid/grid-item/grid-item.component';
+import { ViewOptionService } from './services/view-option-service';
+import { FilterOptionService } from './services/filter-option-service';
+import { HttpService } from './services/http-service';
 
 @NgModule({
   declarations: [
@@ -35,9 +38,10 @@ import { GridItemComponent } from './views/grid/grid-item/grid-item.component';
     MenubarModule,
     SidebarModule,
     DropdownModule,
+    OverlayPanelModule,
     BrowserAnimationsModule
   ],
-  providers: [StorageService],
+  providers: [StorageService, ViewOptionService, FilterOptionService, HttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

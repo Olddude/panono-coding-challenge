@@ -1,11 +1,13 @@
 import { browser, by, element } from 'protractor';
+import * as webdriver from 'selenium-webdriver';
+import Promise = webdriver.promise.Promise;
 
 export class AppPage {
-  navigateTo() {
+  navigateTo(): Promise<any> | any {
     return browser.get('/');
   }
 
-  getParagraphText() {
-    return element(by.css('app-root h1')).getText();
+  isGridDisplayed(): Promise<boolean> | boolean {
+    return element(by.name('grid')).isDisplayed();
   }
 }

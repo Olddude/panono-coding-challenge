@@ -1,11 +1,11 @@
-<div *ngIf="item" class="ui-g">
-  <div class="ui-g-6">
-    <p>{{item?.data?.title | slice:0:20}}</p>
+<div *ngIf="item" class="item ui-g" [class.even]="isEven()">
+  <div class="title ui-g-5 ui-md-9">
+    {{item?.data?.title | slice:0:30}}
   </div>
-  <div class="ui-g-3">
-    <p>{{item?.data?.published_at | date}}</p>
+  <div class="published ui-g-4 ui-md-2">
+    {{item?.data?.published_at | date}}
   </div>
-  <div class="ui-g-3">
+  <div class="favBtn ui-g-3 ui-md-1">
     <button pButton
             type="button"
             [label]="getLabel()"
