@@ -49,7 +49,6 @@ export class MenuComponent implements OnInit {
   }
 
   selectFilter() {
-    console.log(this.selectedFilter);
     this.filterOptionService.selectFilter(this.selectedFilter);
   }
 }

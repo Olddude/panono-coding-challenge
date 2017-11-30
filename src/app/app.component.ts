@@ -18,7 +18,8 @@ import { StorageService } from './services/storage-service';
 export class AppComponent implements OnInit {
 
   items$: Observable<Item[]>;
-  items: Item[];
+  items: Item[] = [];
+  filteredItems: Item[] = [];
 
   currentView$: Observable<string>;
 
@@ -32,29 +33,43 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.currentView$ = this.viewOptionService.view();
 
-    const filterObs$ = (items: Item[]): Observable<Item[]> => {
+    this.httpService.get('http://api3-dev.panono.com/explore')
+      .map(response => response.items)
+      .subscribe(items => {
+        this.items = items;
+      });
+
+    const filterObs$ = (): Observable<Item[]> => {
       return this.filterOptionService.filter()
         .flatMap(filter => {
           if (filter === 'Favorites') {
-            return storageObs$(items);
+            return storageObs$();
           } else {
-            return Observable.of(items);
+            return Observable.of(this.items);
           }
         });
     };
 
-    const storageObs$ = (items: Item[]): Observable<Item[]> => {
+    const storageObs$ = (): Observable<Item[]> => {
       return this.storageService.storage()
-        .map(storage => Object.keys(storage))
-        .map(favoriteIds => items.filter(item => favoriteIds.includes(item.id)));
+        .map(storage => {
+          const keys = Object.keys(storage);
+          console.log(keys);
+          return keys;
+        })
+        .map(favoriteIds => {
+          console.log('items', this.items);
+          console.log('favIds', favoriteIds);
+          const _ = this.items.filter(item => favoriteIds.includes(item.id));
+          console.log(_);
+          return _;
+        });
     }
 
-    this.items$ = this.httpService.get('http://api3-dev.panono.com/explore')
-      .map(response => response.items)
-      .flatMap(items => filterObs$(items));
-
-    this.items$.subscribe(items => {
-      this.items = items;
-    });
+    filterObs$()
+      .subscribe(_ => {
+        console.log(_);
+        this.filteredItems = _;
+      });
   }
 }
