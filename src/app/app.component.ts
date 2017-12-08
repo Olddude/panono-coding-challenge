@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/mergeMap';
-import { ViewOptionService } from './services/view-option-service';
+import { ViewOptionService } from './shared/services/view-option-service';
 import { Observable } from 'rxjs/Observable';
-import { HttpService } from './services/http-service';
-import { FilterOptionService } from './services/filter-option-service';
+import { FilterOptionService } from './shared/services/filter-option-service';
 import { Item } from './model/panono';
-import { StorageService } from './services/storage-service';
+import { StorageService } from './shared/services/storage-service';
+import { HttpService } from './http-service';
 
 
 @Component({
@@ -64,7 +64,7 @@ export class AppComponent implements OnInit {
           console.log(_);
           return _;
         });
-    }
+    };
 
     filterObs$()
       .subscribe(_ => {

@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/fromEvent';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Item } from '../model/panono';
+import { Item } from '../../model/panono';
 
 @Injectable()
 export class StorageService {

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Item } from '../../../model/panono';
-import { StorageService } from '../../../services/storage-service';
+import { StorageService } from '../../../shared/services/storage-service';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
 

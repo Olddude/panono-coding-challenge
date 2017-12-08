@@ -3,11 +3,11 @@
   <main>
     <app-list name="list"
               [hidden]="(currentView$ | async) !== 'List'"
-              [items]="filteredItems">
+              [items]="items">
     </app-list>
     <app-grid name="grid"
               [hidden]="(currentView$ | async) !== 'Grid'"
-              [items]="filteredItems">
+              [items]="items">
     </app-grid>
   </main>
 </div>

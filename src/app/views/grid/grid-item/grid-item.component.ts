@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Item } from '../../../model/panono';
-import { StorageService } from '../../../services/storage-service';
+import { StorageService } from '../../../shared/services/storage-service';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({

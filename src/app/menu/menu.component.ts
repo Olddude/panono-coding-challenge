@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SelectItem } from 'primeng/primeng';
-import { ViewOptionService } from '../services/view-option-service';
-import { FilterOptionService } from '../services/filter-option-service';
+import { ViewOptionService } from '../shared/services/view-option-service';
+import { FilterOptionService } from '../shared/services/filter-option-service';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({

@@ -4,7 +4,6 @@ import { AppComponent } from './app.component';
 import { HttpModule } from '@angular/http';
 import { GridComponent } from './views/grid/grid.component';
 import { ListComponent } from './views/list/list.component';
-import { StorageService } from './services/storage-service';
 import { ListItemComponent } from './views/list/list-item/list-item.component';
 import { MenuComponent } from './menu/menu.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -14,9 +13,8 @@ import {
   SidebarModule,
 } from 'primeng/primeng';
 import { GridItemComponent } from './views/grid/grid-item/grid-item.component';
-import { ViewOptionService } from './services/view-option-service';
-import { FilterOptionService } from './services/filter-option-service';
-import { HttpService } from './services/http-service';
+import { SharedModule } from './shared/shared.module';
+import { HttpService } from './http-service';
 
 @NgModule({
   declarations: [
@@ -31,6 +29,7 @@ import { HttpService } from './services/http-service';
     BrowserModule,
     HttpModule,
     FormsModule,
+    SharedModule.forRoot(),
     DataListModule,
     DataTableModule,
     ButtonModule,
@@ -41,7 +40,7 @@ import { HttpService } from './services/http-service';
     OverlayPanelModule,
     BrowserAnimationsModule
   ],
-  providers: [StorageService, ViewOptionService, FilterOptionService, HttpService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [HttpService]
 })
 export class AppModule { }
