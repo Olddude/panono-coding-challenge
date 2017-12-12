@@ -2,12 +2,15 @@
   <app-menu></app-menu>
   <main>
     <app-list name="list"
-              [hidden]="(currentView$ | async) !== 'List'"
+              [hidden]="currentView !== 'List'"
               [items]="items">
     </app-list>
     <app-grid name="grid"
-              [hidden]="(currentView$ | async) !== 'Grid'"
+              [hidden]="currentView !== 'Grid'"
               [items]="items">
     </app-grid>
   </main>
+  <footer>
+    <p-paginator (onPageChange)="paginate($event)"></p-paginator>
+  </footer>
 </div>

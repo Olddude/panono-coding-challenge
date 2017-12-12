@@ -8,7 +8,7 @@ import { Item } from '../../model/panono';
 @Injectable()
 export class StorageService {
 
-  storageSubject = new BehaviorSubject<Storage>(window.localStorage);
+  private storageSubject = new BehaviorSubject<Storage>(window.localStorage);
 
   constructor() {
   }
@@ -30,5 +30,18 @@ export class StorageService {
 
   storage(): Observable<Storage> {
     return this.storageSubject.asObservable();
+  }
+
+  getItemsFromStorage(storage: Storage): Item[] {
+    const values = [];
+    const keys = Object.keys(localStorage);
+    let i = keys.length;
+
+    while ( i-- ) {
+      // TODO validate if item is suitable
+      values.push(JSON.parse(localStorage.getItem(keys[i])));
+    }
+
+    return values;
   }
 }

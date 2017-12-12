@@ -1,13 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/concat';
+import 'rxjs/add/operator/merge';
 import 'rxjs/add/operator/mergeMap';
-import { ViewOptionService } from './shared/services/view-option-service';
+import 'rxjs/add/observable/forkJoin';
+import 'rxjs/add/observable/if';
+import 'rxjs/add/observable/zip';
+import 'rxjs/add/observable/combineLatest';
 import { Observable } from 'rxjs/Observable';
+import { Item, PanonoApp } from './model/panono';
+import { ViewOptionService } from './shared/services/view-option-service';
 import { FilterOptionService } from './shared/services/filter-option-service';
-import { Item } from './model/panono';
 import { StorageService } from './shared/services/storage-service';
-import { HttpService } from './http-service';
+import { HttpService } from './shared/services/http-service';
+import { Subscription } from 'rxjs/Subscription';
 
 
 @Component({
@@ -15,13 +22,13 @@ import { HttpService } from './http-service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
 
-  items$: Observable<Item[]>;
+  currentView: string;
   items: Item[] = [];
-  filteredItems: Item[] = [];
+  offset: string;
 
-  currentView$: Observable<string>;
+  private subscriptions: Subscription[] = [];
 
   constructor(
     private httpService: HttpService,
@@ -31,45 +38,30 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.currentView$ = this.viewOptionService.view();
+    this.subscriptions.push(
+      this.viewOptionService.view().subscribe(_ => this.currentView = _)
+    );
 
-    this.httpService.get('http://api3-dev.panono.com/explore')
-      .map(response => response.items)
-      .subscribe(items => {
-        this.items = items;
-      });
+    const panono$ = this.httpService.get('https://api3-dev.panono.com/explore?offset=');
+    const filter$ = this.filterOptionService.filter();
+    const storage$ = this.storageService.storage();
 
-    const filterObs$ = (): Observable<Item[]> => {
-      return this.filterOptionService.filter()
-        .flatMap(filter => {
-          if (filter === 'Favorites') {
-            return storageObs$();
-          } else {
-            return Observable.of(this.items);
+    this.subscriptions.push(
+      Observable.combineLatest(panono$, filter$, storage$)
+        .subscribe(
+          ([panono, filter, storage]) => {
+            this.offset = panono.offset;
+            this.items = (filter === 'Favorites') ? this.storageService.getItemsFromStorage(storage) : panono.items;
           }
-        });
-    };
+        )
+    );
+  }
 
-    const storageObs$ = (): Observable<Item[]> => {
-      return this.storageService.storage()
-        .map(storage => {
-          const keys = Object.keys(storage);
-          console.log(keys);
-          return keys;
-        })
-        .map(favoriteIds => {
-          console.log('items', this.items);
-          console.log('favIds', favoriteIds);
-          const _ = this.items.filter(item => favoriteIds.includes(item.id));
-          console.log(_);
-          return _;
-        });
-    };
+  ngOnDestroy() {
+    this.subscriptions.forEach(_ => _.unsubscribe());
+  }
 
-    filterObs$()
-      .subscribe(_ => {
-        console.log(_);
-        this.filteredItems = _;
-      });
+  paginate(event: any) {
+    console.log(event);
   }
 }

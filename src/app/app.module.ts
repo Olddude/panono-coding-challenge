@@ -10,11 +10,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import {
   ButtonModule, DataListModule, DataTableModule, DropdownModule, MenubarModule, MenuModule, OverlayPanelModule,
-  SidebarModule,
+  SidebarModule, PaginatorModule
 } from 'primeng/primeng';
 import { GridItemComponent } from './views/grid/grid-item/grid-item.component';
 import { SharedModule } from './shared/shared.module';
-import { HttpService } from './http-service';
 
 @NgModule({
   declarations: [
@@ -38,9 +37,9 @@ import { HttpService } from './http-service';
     SidebarModule,
     DropdownModule,
     OverlayPanelModule,
+    PaginatorModule,
     BrowserAnimationsModule
   ],
-  bootstrap: [AppComponent],
-  providers: [HttpService]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
