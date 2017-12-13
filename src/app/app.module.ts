@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HttpModule } from '@angular/http';
 import { GridComponent } from './views/grid/grid.component';
@@ -15,6 +16,10 @@ import {
 import { GridItemComponent } from './views/grid/grid-item/grid-item.component';
 import { SharedModule } from './shared/shared.module';
 
+const routes: Routes = [
+  { path: '', component: AppComponent }
+];
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +34,7 @@ import { SharedModule } from './shared/shared.module';
     HttpModule,
     FormsModule,
     SharedModule.forRoot(),
+    RouterModule.forRoot(routes),
     DataListModule,
     DataTableModule,
     ButtonModule,

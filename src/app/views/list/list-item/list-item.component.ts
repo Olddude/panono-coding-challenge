@@ -28,6 +28,7 @@ export class ListItemComponent implements OnInit {
   }
 
   getLabel(): string {
+    // TODO find some suitable font
     return (this.isFavorite) ? 'Favorite' : 'Add';
   }
 
@@ -37,9 +38,5 @@ export class ListItemComponent implements OnInit {
     } else {
       this.storageService.add(this.item);
     }
-  }
-
-  isEven() {
-    return this.index % 2 === 0;
   }
 }

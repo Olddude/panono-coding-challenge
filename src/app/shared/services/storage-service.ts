@@ -37,9 +37,11 @@ export class StorageService {
     const keys = Object.keys(localStorage);
     let i = keys.length;
 
-    while ( i-- ) {
-      // TODO validate if item is suitable
-      values.push(JSON.parse(localStorage.getItem(keys[i])));
+    while (i--) {
+      try {
+        const item = JSON.parse(localStorage.getItem(keys[i])) as Item;
+        values.push(item);
+      } catch (ex) { }
     }
 
     return values;

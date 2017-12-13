@@ -1,7 +1,14 @@
 .item {
   align-items: center;
   min-height: 54px;
-}
-.even {
-  background-color: #EEE;
+  border: 1px solid black;
+  margin-left: 0.2rem;
+  margin-right: 0.2rem;
+  margin-bottom: 0.2rem;
+
+  div:last-child {
+    button {
+      width: 65px;
+    }
+  }
 }

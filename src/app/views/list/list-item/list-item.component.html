@@ -1,4 +1,4 @@
-<div *ngIf="item" class="item ui-g" [class.even]="isEven()">
+<div *ngIf="item" class="item ui-g">
   <div class="title ui-g-5 ui-md-9">
     {{item?.data?.title | slice:0:30}}
   </div>
@@ -8,7 +8,7 @@
   <div class="favBtn ui-g-3 ui-md-1">
     <button pButton
             type="button"
-            [label]="getLabel()"
+            [label]="getLabel() | slice:0:3"
             (click)="addRemoveToFavs()">
     </button>
   </div>
