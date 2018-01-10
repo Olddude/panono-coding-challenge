@@ -23,7 +23,7 @@ export class GridItemComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.isFavoriteSubscription = this.storageService.storage()
-      .map(storage => Object.keys(storage).includes(this.item.id))
+      .map(storage => this.storageService.getItemsFromStorage(storage).map(_ => _.id).includes(this.item.id))
       .subscribe(data => {
         this.isFavorite = data;
         this.label = (data) ? '- Favorite' : '+ Add';

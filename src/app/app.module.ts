@@ -14,7 +14,7 @@ import {
   SidebarModule, PaginatorModule
 } from 'primeng/primeng';
 import { GridItemComponent } from './views/grid/grid-item/grid-item.component';
-import { SharedModule } from './shared/shared.module';
+import { ServicesModule } from './shared/services.module';
 
 const routes: Routes = [
   { path: '', component: AppComponent }
@@ -33,7 +33,7 @@ const routes: Routes = [
     BrowserModule,
     HttpModule,
     FormsModule,
-    SharedModule.forRoot(),
+    ServicesModule.forRoot(),
     RouterModule.forRoot(routes),
     DataListModule,
     DataTableModule,

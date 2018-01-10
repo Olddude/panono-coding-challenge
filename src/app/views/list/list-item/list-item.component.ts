@@ -23,12 +23,11 @@ export class ListItemComponent implements OnInit {
 
   ngOnInit() {
     this.storageService.storage()
-      .map(storage => Object.keys(storage).includes(this.item.id))
+      .map(storage => this.storageService.getItemsFromStorage(storage).map(_ => _.id).includes(this.item.id))
       .subscribe(data => this.isFavorite = data);
   }
 
   getLabel(): string {
-    // TODO find some suitable font
     return (this.isFavorite) ? 'Favorite' : 'Add';
   }
 

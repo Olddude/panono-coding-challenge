@@ -11,15 +11,26 @@ export class StorageService {
   private storageSubject = new BehaviorSubject<Storage>(window.localStorage);
 
   constructor() {
+    if (!window.localStorage.getItem('favorite360')) {
+      window.localStorage.setItem('favorite360', JSON.stringify([]));
+    }
   }
 
   add(item: Item) {
-    window.localStorage.setItem(item.id, JSON.stringify(item));
+    const items: Item[] = JSON.parse(window.localStorage.getItem('favorite360'));
+    if (!items.map(_ => _.id).includes(item.id)) {
+      items.push(item);
+    }
+    window.localStorage.setItem('favorite360', JSON.stringify(items));
     this.storageSubject.next(window.localStorage);
   }
 
   remove(item: Item) {
-    window.localStorage.removeItem(item.id);
+    let items: Item[] = JSON.parse(localStorage.getItem('favorite360'));
+    if (items.map(_ => _.id).includes(item.id)) {
+      items = items.filter(_ => _.id !== item.id);
+    }
+    window.localStorage.setItem('favorite360', JSON.stringify(items));
     this.storageSubject.next(window.localStorage);
   }
 
@@ -33,17 +44,6 @@ export class StorageService {
   }
 
   getItemsFromStorage(storage: Storage): Item[] {
-    const values = [];
-    const keys = Object.keys(localStorage);
-    let i = keys.length;
-
-    while (i--) {
-      try {
-        const item = JSON.parse(localStorage.getItem(keys[i])) as Item;
-        values.push(item);
-      } catch (ex) { }
-    }
-
-    return values;
+    return JSON.parse(window.localStorage.getItem('favorite360'));
   }
 }

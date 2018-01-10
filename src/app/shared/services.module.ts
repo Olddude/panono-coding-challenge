@@ -7,10 +7,10 @@ import { HttpService } from './services/http-service';
 import { UrlService } from './services/url-service';
 
 @NgModule()
-export class SharedModule {
+export class ServicesModule {
   static forRoot() {
     return {
-      ngModule: SharedModule,
+      ngModule: ServicesModule,
       providers: [HttpService, UrlService, StorageService, ViewOptionService, FilterOptionService]
     };
   }
