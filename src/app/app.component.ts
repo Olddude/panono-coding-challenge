@@ -14,6 +14,7 @@ import { ViewOptionService } from './shared/services/view-option-service';
 import { FilterOptionService } from './shared/services/filter-option-service';
 import { StorageService } from './shared/services/storage-service';
 import { HttpService } from './shared/services/http-service';
+import { UrlService } from './shared/services/url-service';
 import { Subscription } from 'rxjs/Subscription';
 
 
@@ -26,11 +27,12 @@ export class AppComponent implements OnInit, OnDestroy {
 
   currentView: string;
   items: Item[] = [];
-  offset: string;
+  nextUrl: string;
 
   private subscriptions: Subscription[] = [];
 
   constructor(
+    private urlService: UrlService,
     private httpService: HttpService,
     private filterOptionService: FilterOptionService,
     private storageService: StorageService,
@@ -42,15 +44,16 @@ export class AppComponent implements OnInit, OnDestroy {
       this.viewOptionService.view().subscribe(_ => this.currentView = _)
     );
 
-    const panono$ = this.httpService.get('https://api3-dev.panono.com/explore?offset=');
+    const url$ = this.urlService.url();
+    const panono$ = (url: string) => this.httpService.get(url);
     const filter$ = this.filterOptionService.filter();
     const storage$ = this.storageService.storage();
 
     this.subscriptions.push(
-      Observable.combineLatest(panono$, filter$, storage$)
+      url$.flatMap(url => Observable.combineLatest(panono$(url), filter$, storage$))
         .subscribe(
           ([panono, filter, storage]) => {
-            this.offset = panono.offset;
+            this.nextUrl = panono.next;
             this.items = (filter === 'Favorites') ? this.storageService.getItemsFromStorage(storage) : panono.items;
           }
         )
@@ -63,5 +66,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
   paginate(event: any) {
     console.log(event);
+    this.urlService.change(this.nextUrl);
   }
 }

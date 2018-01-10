@@ -1,1 +1,9 @@
-
+::ng-deep footer {
+  p-paginator {
+    .ui-paginator {
+      .ui-paginator-prev, .ui-paginator-pages, .ui-paginator-next {
+        display: none;
+      }
+    }
+  }
+}
